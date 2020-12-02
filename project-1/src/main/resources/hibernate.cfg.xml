@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0/EN"
+	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+	
+	<hibernate-configuration>
+		<session-factory>
+			<property name ="hbm2ddl.auto">update</property>	
+			<property name ="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+			
+			<!-- <property name ="connection.url">jdbc:postgresql://localhost:9090/postgres</property>  -->
+			<property name ="connection.url">jdbc:postgresql://revdatabase.cwrli2cspmix.us-east-2.rds.amazonaws.com/revdata</property>
+			
+			<property name ="connection.username">RevDataBase</property>
+			<property name ="connection.password">evild0er</property>
+			
+			<property name="connection.driver_class">org.postgresql.Driver</property>
+			<property name="hibernate.connection.pool_size">10</property>
+			
+			<!-- The mapping resource is for the hbm.xml model for 1 model. this is a properties page and is usually just used as the 
+			mapping class. -->
+		<!-- <mapping resource=employee.hbm.xml/> -->
+			<!-- There will be multiple mapping class. -->
+		<mapping class="com.revature.model.Employee"/>
+		<mapping class="com.revature.model.Manager"/>
+		<!-- This mapping resource can be the model itself with hibernate annotations. -->
+		</session-factory>
+	</hibernate-configuration>

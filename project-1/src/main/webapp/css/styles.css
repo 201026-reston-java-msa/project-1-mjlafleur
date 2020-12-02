@@ -1,0 +1,17 @@
+
+body {
+    background-color: darkgrey;
+    max-width: 150px;
+    font-family:  Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: black;
+    border: 2px dashed black;
+    padding: 5%;
+    height: 10%;
+    width: 25%;
+    border-radius: 20px;
+    line-height: 22px;
+}
+div {
+    align-content: center;
+}
+
