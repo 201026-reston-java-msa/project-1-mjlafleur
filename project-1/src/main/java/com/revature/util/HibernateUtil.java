@@ -27,5 +27,6 @@ public class HibernateUtil {
 		sf.close();
 		// By closing our session, you free up the connections from the connection
 		// pool to be used by a new session.
+		
 	}
 }
