@@ -8,25 +8,25 @@ import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revature.model.Employee;
-import com.revature.service.EmployeeService;
+import com.revature.model.User;
+import com.revature.service.UserService;
 
-public class EmployeeController {
-	public static EmployeeService employeeServ = new EmployeeService();
+public class UserController {
+	public static UserService userServ = new UserService();
 	/////////////////////////////////// POST/////////////////////////
 
 	public static void login(HttpServletRequest request, HttpServletResponse response)
 			throws JsonProcessingException, IOException {
 
 		ObjectMapper mapper = new ObjectMapper();
-		Employee employee = mapper.readValue(request.getInputStream(), Employee.class);// turns json to USER object
+		User employee = mapper.readValue(request.getInputStream(), User.class);// turns json to USER object
 
 		String username = employee.getUsername();
 		String password = employee.getPassword();
 
-		Employee targetEmployee = employeeServ.login(username, password);
+		User targetEmployee = userServ.login(username, password);
 		// always responding from the controller
-		if (targetEmployee.getId() > 0) {
+		if (targetEmployee.getUserId() > 0) {
 			response.getWriter().write(new ObjectMapper().writeValueAsString(targetEmployee.getUsername()));
 			HttpSession session = request.getSession();
 			session.setAttribute("username", targetEmployee.getUsername());

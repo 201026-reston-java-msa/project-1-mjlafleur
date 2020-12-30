@@ -1,14 +1,10 @@
 package com.revature.helper;
-
 import java.io.IOException;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.apache.log4j.Logger;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.revature.controller.EmployeeController;
+import com.revature.controller.UserController;
 
 public class Helper {
 	public static Logger log = Logger.getLogger(Helper.class);
@@ -19,7 +15,7 @@ public static void postProcess(HttpServletRequest request, HttpServletResponse r
 		switch(request.getRequestURI()) {
 		case "/project-1/login":
 			System.out.println("Got the URI");
-			EmployeeController.login(request, response);
+			UserController.login(request, response);
 			break;
 		default:
 			System.out.println("failure");

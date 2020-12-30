@@ -8,8 +8,8 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
-import com.revature.model.Employee;
 import com.revature.model.Name;
+import com.revature.model.User;
 
 public class Driver {
 
@@ -22,17 +22,12 @@ public class Driver {
 		Session session = sf.openSession();
 		Transaction t = session.beginTransaction();
 		
-		Employee e1 = new Employee();
-		e1.setId(105);
-//		Name n1 = new Name();
-//		n1.setFirstName("Alex");
-//		n1.setLastName("Seaholm");
-//		e1.setName(n1);
+		User e1 = new User();
 		e1.setFirstName("Alex");
 		e1.setLastName("Seaholm");
 		e1.setUsername("ASeaholm");
 		e1.setPassword("password");
-		e1.setReimbursement(5.00);
+		e1.setEmail("ASeaholm@gmail.com");
 		
 		
 		session.save(e1);

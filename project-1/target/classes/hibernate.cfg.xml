@@ -5,24 +5,44 @@
 	
 	<hibernate-configuration>
 		<session-factory>
-			<property name ="hbm2ddl.auto">update</property>	
-			<property name ="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
-			
+			<!-- Connection for the AWS RDS -->
 			<!-- <property name ="connection.url">jdbc:postgresql://localhost:9090/postgres</property>  -->
-			<property name ="connection.url">jdbc:postgresql://revdatabase.cwrli2cspmix.us-east-2.rds.amazonaws.com/revdata</property>
-			
+			<property name ="connection.url">jdbc:postgresql://revdatabase.cwrli2cspmix.us-east-2.rds.amazonaws.com:5432/</property>
+			<property name="hibernate.default_schema">ERS</property>
 			<property name ="connection.username">RevDataBase</property>
-			<property name ="connection.password">evild0er</property>
+			<property name ="connection.password">System.env("TRAINING_DB_PASSWORD")</property>
 			
+			<property name ="hbm2ddl.auto">update</property>
+			<!-- 
+			CREATE, creates the schema, destroying the previous data.
+			VALIDATE, validate the schema, makes no changes to the database
+			UPDATE, update the schema
+			CREATE-DROP, drop the schema when the SessionFactory is closed explicitly,
+						typically when the app is stopped.
+			NONE does nothing with the schema, makes no changes to the database.
+			-->	
+			
+			<!-- Simple the dialect of SQL used for the DB -->
+			<property name ="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+			<!-- the location of the Driver for the dialect chosen. -->
 			<property name="connection.driver_class">org.postgresql.Driver</property>
-			<property name="hibernate.connection.pool_size">10</property>
+			<!-- The set number of connection available for "checkout" from app to DB.-->
+			 <property name="hibernate.connection.pool_size">5</property>
 			
+			
+			<property name="hibernate.show_sql">true</property>
+			<property name="hibernate.format_sql">true</property>
+			
+
 			<!-- The mapping resource is for the hbm.xml model for 1 model. this is a properties page and is usually just used as the 
 			mapping class. -->
 		<!-- <mapping resource=employee.hbm.xml/> -->
 			<!-- There will be multiple mapping class. -->
-		<mapping class="com.revature.model.Employee"/>
-		<mapping class="com.revature.model.Manager"/>
+		<mapping class="com.revature.model.User"/>
+		<mapping class="com.revature.model.Role"/>
+		<mapping class="com.revature.model.Reimbursement"/>
+		<mapping class="com.revature.model.ReimbursementType"/>
+		<mapping class="com.revature.model.ReimbursementStatus"/>
 		<!-- This mapping resource can be the model itself with hibernate annotations. -->
 		</session-factory>
 	</hibernate-configuration>

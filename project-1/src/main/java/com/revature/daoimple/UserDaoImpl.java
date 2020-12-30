@@ -8,13 +8,13 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
-import com.revature.dao.EmployeeDao;
-import com.revature.model.Employee;
+import com.revature.dao.UserDao;
+import com.revature.model.User;
 
-public class EmployeeDaoImpl implements EmployeeDao {
+public class UserDaoImpl implements UserDao {
 
 	@Override
-	public Employee login(String username, String password) {
+	public User login(String username, String password) {
 		StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
 		
 		Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();
@@ -22,7 +22,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		Session session = sf.openSession();
 		Transaction t = session.beginTransaction();
 		
-		Employee e1 = new Employee();
+		User e1 = new User();
 		
 		
 		return null;
