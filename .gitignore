@@ -12,6 +12,7 @@ release.properties
 dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
+Servers/
 # https://github.com/takari/maven-wrapper#usage-without-binary-jar
 
 ### STS ###
