@@ -8,19 +8,23 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
-import com.revature.model.Name;
 import com.revature.model.User;
 
+import static com.revature.util.HibernateUtil.getSession;
+import static com.revature.util.HibernateUtil.closeSes;
 public class Driver {
 
 	public static void main(String[] args) {
-		StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
 		
-		Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();
 		
-		SessionFactory sf = meta.getSessionFactoryBuilder().build();
-		Session session = sf.openSession();
-		Transaction t = session.beginTransaction();
+		//StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
+		
+		//Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();
+		
+		//SessionFactory sf = meta.getSessionFactoryBuilder().build();
+		//Session session = sf.openSession();
+		Session ses = getSession();
+		Transaction t = ses.beginTransaction();
 		
 		User e1 = new User();
 		e1.setFirstName("Alex");
@@ -30,11 +34,9 @@ public class Driver {
 		e1.setEmail("ASeaholm@gmail.com");
 		
 		
-		session.save(e1);
+		ses.save(e1);
 		t.commit();
 		System.out.println("Successfully Saved");
-		sf.close();
-		session.close();
-	
+		closeSes();
 	}
 }

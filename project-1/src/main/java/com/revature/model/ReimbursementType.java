@@ -8,15 +8,15 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="reimbursement_type")
+@Table(name="ERS_REIMBURSEMENT_TYPE")
 public class ReimbursementType {
 	
 	@Id
-	@Column
+	@Column(name="REIMB_TYPE_ID")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int typeId;
 	
-	@Column(name="type_name")
+	@Column(name="REIMB_TYPE", length=10)
 	private String typeName;
 	
 	//CONSTRUCTOR//

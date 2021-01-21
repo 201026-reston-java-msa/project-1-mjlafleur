@@ -9,16 +9,16 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="roles")
+@Table(name="ERS_USER_ROLES")
 public class Role {
 	
 	@Id
-	@Column(name="id")
+	@Column(name="ERS_USER_ROLE_ID")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="role-sequence")
 	@SequenceGenerator(name = "role-sequence",initialValue=100, allocationSize=1)   
 	private int roleId;
 	
-	@Column(name="name")
+	@Column(name="ERS_USER_ROLES",length=10)
 	private String roleName;
 	
 	//CONSTRUCTOR///

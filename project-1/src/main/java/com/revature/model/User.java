@@ -16,12 +16,12 @@ import com.sun.istack.NotNull;
 
 
 @Entity
-@Table //(name="Employee") this is the default and doesn't have to be used because the class is Employee.
+@Table (name="ERS_USERS") //this is the default and doesn't have to be used because the class is Employee.
 public class User{
 	
 	@Id
-	@Column(name="user_id") //the default column would be "id"
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="ERS_USERS_ID") //the default column would be "id"
+	@GeneratedValue(strategy=GenerationType.IDENTITY) //sets Primary key
 	private int userId;
 	
 	/*GeneratedValue 
@@ -32,23 +32,28 @@ public class User{
 	*/
 	
 	@NotNull //this is handled by Hibernate, HOWEVER, the property Can be changed to false affecting the DB with Null values.
-	@Column(unique=true, nullable=false) //nullable is not null nut at the database level.
+	@Column(unique=true, nullable=false, length=50) //nullable is not null nut at the database level.
 	private String username;
 	
-	@NotNull
+	/////////////////////////////////////NEEDS ENCRYPTION/////////////////////////
+	@NotNull //this has to be encrypted not really sure how to do this.
+	@Column(length=50,name="ERS_PASSWORD")
 	private String password;
 	
 	@NotNull
+	@Column(length=100,name="USER_FIRST_NAME")
 	private String firstName;
 	
 	@NotNull
+	@Column(length=100,name="USER_LAST_NAME")
 	private String lastName;
 	
 	@NotNull
+	@Column(length=150, name="USER_EMAIL", unique=true)
 	private String email;
 	
 	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinColumn(name="role_id")
+	@JoinColumn(name="USER_ROLE_ID")	
 	private Role role;
 
 	//CONSTRUCTOR

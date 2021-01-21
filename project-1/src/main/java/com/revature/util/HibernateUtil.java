@@ -7,9 +7,12 @@ import org.hibernate.cfg.Configuration;
 public class HibernateUtil {
 
 	private static Session ses;
-	// We will use the SessionFactory interface to create a Configuration()
+	 // We will use the SessionFactory interface to create a Configuration()
 	//Object which will call the .configure method on on our "hibernate.cfg.xml"
-	private static SessionFactory sf = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+	private static Configuration configuration = new Configuration().setProperty("hibernate.connection.password",System.getenv("TRAINING_DB_PASSWORD"));;
+	
+	
+ 	private static SessionFactory sf = configuration.configure("hibernate.cfg.xml").buildSessionFactory();
 	
 	// We will create a getSession() method which is called in our DAO layer
 	// This method obtains a JDBC connection which we use to perform a 

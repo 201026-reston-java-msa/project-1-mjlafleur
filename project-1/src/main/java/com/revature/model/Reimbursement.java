@@ -1,5 +1,6 @@
 package com.revature.model;
 
+import java.sql.Blob;
 import java.time.LocalDateTime;
 
 import javax.persistence.Basic;
@@ -11,73 +12,85 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.type.BlobType;
 
 import com.sun.istack.NotNull;
 
 @Entity
-@Table(name="reimbursement")
+@Table(name="ERS_REIMBURSEMENT")
 public class Reimbursement {
 	
 	@Id
-	@Column(name="reimbursement_id")
+	@Column(name="REIMB_ID")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int reimbId;
 
 	@NotNull
-	@Column(name="amount")
+	@Column(name="REIMB_AMOUNT")
 	private double amount;
 	
 	@Basic
-	@Column(name="submitted")
+	@Column(name="REIMB_SUBMITTED")
 	private LocalDateTime submitedTime;
 	
 	@Basic
-	@Column(name="resolved")
+	@Column(name="REIMB_RESOLVED")
 	private LocalDateTime resolvedTime;
 	
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinColumn(name="author_id")
-	private User submitter;
-	
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinColumn(name="resolver_id")
-	private User resolver;
-	
-	@Column(name="description")
+	@Column(name="REIMB_DESCRIPTION",length=250)
 	private String description;
 	
+	//////////////////////////////BLOB Binary Large Object
+	@Lob
+	@Column(name="REIMB_RECEIPT")
+	private Blob receipt;
+	////////////////////////////////
+	
+
 	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinColumn(name="status_id")
+	@JoinColumn(name="REIMB_AUTHOR")
+	private User author;
+	
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinColumn(name="REIMB_RESOLVER")
+	private User resolver;
+	
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinColumn(name="REIMB_STATUS_ID")
 	private ReimbursementStatus status;
 	
 	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinColumn(name="type_id")
+	@JoinColumn(name="REIMB_TYPE_ID")
 	private ReimbursementType type;
+	
+	
 	
 	//CONSTRUCTOR//
 	public Reimbursement() {
 	}
 
-	public Reimbursement(int reimbId, double amount, LocalDateTime submitedTime, User submitter, String description,
+	public Reimbursement(int reimbId, double amount, LocalDateTime submitedTime, User author, String description,
 			ReimbursementType type) {
 		super();
 		this.reimbId = reimbId;
 		this.amount = amount;
 		this.submitedTime = LocalDateTime.now();
-		this.submitter = submitter;
+		this.author = author;
 		this.description = description;
 		this.type = type;
 	}
 	
-	public Reimbursement(int reimbId, double amount, LocalDateTime submitedTime, User submitter, String description,
+	public Reimbursement(int reimbId, double amount, LocalDateTime submitedTime, User author, String description,
 			ReimbursementStatus status, ReimbursementType type) {
 		super();
 		this.reimbId = reimbId;
 		this.amount = amount;
 		this.submitedTime = LocalDateTime.now();
-		this.submitter = submitter;
+		this.author = author;
 		this.description = description;
 		this.status = status;
 		this.type = type;
@@ -90,9 +103,27 @@ public class Reimbursement {
 		this.amount = amount;
 		this.submitedTime = submitedTime;
 		this.resolvedTime = resolvedTime;
-		this.submitter = submitter;
+		this.author = submitter;
 		this.resolver = resolver;
 		this.description = description;
+		this.status = status;
+		this.type = type;
+	}
+	
+	
+
+	public Reimbursement(int reimbId, double amount, LocalDateTime submitedTime, LocalDateTime resolvedTime,
+			String description, Blob receipt, User author, User resolver, ReimbursementStatus status,
+			ReimbursementType type) {
+		super();
+		this.reimbId = reimbId;
+		this.amount = amount;
+		this.submitedTime = submitedTime;
+		this.resolvedTime = resolvedTime;
+		this.description = description;
+		this.receipt = receipt;
+		this.author = author;
+		this.resolver = resolver;
 		this.status = status;
 		this.type = type;
 	}
@@ -130,12 +161,12 @@ public class Reimbursement {
 		this.resolvedTime = resolvedTime;
 	}
 
-	public User getSubmitter() {
-		return submitter;
+	public User getAuthor() {
+		return author;
 	}
 
-	public void setSubmitter(User submitter) {
-		this.submitter = submitter;
+	public void setAuthor(User author) {
+		this.author = author;
 	}
 
 	public User getResolver() {
@@ -161,6 +192,15 @@ public class Reimbursement {
 	public void setStatus(ReimbursementStatus status) {
 		this.status = status;
 	}
+	
+	public Blob getReceipt() {
+		return receipt;
+	}
+
+	public void setReceipt(Blob receipt) {
+		this.receipt = receipt;
+	}
+
 
 	public ReimbursementType getType() {
 		return type;
@@ -174,7 +214,7 @@ public class Reimbursement {
 	@Override
 	public String toString() {
 		return "Reimbursement [reimbId=" + reimbId + ", amount=" + amount + ", submitedTime=" + submitedTime
-				+ ", resolvedTime=" + resolvedTime + ", submitter=" + submitter + ", resolver=" + resolver
+				+ ", resolvedTime=" + resolvedTime + ", author=" + author + ", resolver=" + resolver
 				+ ", description=" + description + ", status=" + status + ", type=" + type + "]";
 	}
 	
