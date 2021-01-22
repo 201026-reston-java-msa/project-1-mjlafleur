@@ -9,8 +9,7 @@ public class HibernateUtil {
 	private static Session ses;
 	 // We will use the SessionFactory interface to create a Configuration()
 	//Object which will call the .configure method on on our "hibernate.cfg.xml"
-	private static Configuration configuration = new Configuration().setProperty("hibernate.connection.password",System.getenv("TRAINING_DB_PASSWORD"));;
-	
+	private static Configuration configuration = new Configuration().setProperty("hibernate.connection.password",System.getenv("TRAINING_DB_PASSWORD"));
 	
  	private static SessionFactory sf = configuration.configure("hibernate.cfg.xml").buildSessionFactory();
 	
