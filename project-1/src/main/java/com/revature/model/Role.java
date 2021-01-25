@@ -14,15 +14,23 @@ public class Role {
 	
 	@Id
 	@Column(name="ERS_USER_ROLE_ID")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="role-sequence")
-	@SequenceGenerator(name = "role-sequence",initialValue=100, allocationSize=1)   
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ERS_USER_ROLE_ID") //must Match 
+	@SequenceGenerator(name = "ERS_USER_ROLE_ID",initialValue=100, allocationSize=1)   
 	private int roleId;
 	
-	@Column(name="ERS_USER_ROLES",length=10)
+	@Column(name="USER_ROLES",length=10)
 	private String roleName;
 	
 	//CONSTRUCTOR///
 	public Role() {
+	}
+	
+	public Role(int roleId) {
+		this.roleId = roleId;
+	}
+	
+	public Role(String roleName) {
+		this.roleName = roleName;
 	}
 	
 	public Role(int roleId, String roleName) {

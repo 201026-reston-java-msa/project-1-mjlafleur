@@ -12,7 +12,7 @@
 			<property name ="connection.username">RevDataBase</property>
 			<!-- <property name ="connection.password">evild0er</property> -->
 			<!--  -->
-			<property name ="hbm2ddl.auto">create</property>
+			<property name ="hbm2ddl.auto">update</property>
 			<!-- 
 			CREATE, creates the schema, destroying the previous data.
 			VALIDATE, validate the schema, makes no changes to the database

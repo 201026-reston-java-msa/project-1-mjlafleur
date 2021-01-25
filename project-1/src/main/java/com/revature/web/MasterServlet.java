@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.revature.helper.Helper;
+import com.revature.helper.ServletHelper;
 
 
 public class MasterServlet extends HttpServlet{
@@ -16,13 +16,13 @@ public class MasterServlet extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Helper.getProcess(req,resp);
+		ServletHelper.getProcess(req,resp);
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	System.out.println("doPost");
-		Helper.postProcess(req, resp);
+		ServletHelper.postProcess(req, resp);
 	}
 
 }

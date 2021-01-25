@@ -10,6 +10,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 import com.revature.model.ReimbursementStatus;
 import com.revature.model.ReimbursementType;
+import com.revature.model.Role;
 import com.revature.model.User;
 
 import static com.revature.util.HibernateUtil.getSession;
@@ -28,7 +29,15 @@ public class Driver {
 		Session ses = getSession();
 		Transaction t = ses.beginTransaction();
 		
-		
+		Role r1 = new Role();
+		r1.setRoleName("Admin");
+		ses.save(r1);
+		Role r2 = new Role();
+		r2.setRoleName("Manager");
+		ses.save(r2);
+		Role r3 = new Role();
+		r3.setRoleName("Employee");
+		ses.save(r3);
 		
 		User e1 = new User();
 		e1.setFirstName("Alex");
@@ -36,6 +45,7 @@ public class Driver {
 		e1.setUsername("ASeaholm");
 		e1.setPassword("password");
 		e1.setEmail("ASeaholm@gmail.com");
+		e1.setRole(r3);
 		ses.save(e1);
 		
 		ReimbursementStatus rs1 = new ReimbursementStatus();
@@ -60,6 +70,8 @@ public class Driver {
 		ReimbursementType rt4 = new ReimbursementType();
 		rt4.setTypeName("OTHER");
 		ses.save(rt4);
+		
+		
 		
 		
 		t.commit();

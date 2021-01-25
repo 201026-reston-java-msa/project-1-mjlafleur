@@ -32,7 +32,7 @@ public class User{
 	*/
 	
 	@NotNull //this is handled by Hibernate, HOWEVER, the property Can be changed to false affecting the DB with Null values.
-	@Column(unique=true, nullable=false, length=50) //nullable is not null nut at the database level.
+	@Column(name= "ERS_USERNAME",unique=true, nullable=false, length=50) //nullable is not null nut at the database level.
 	private String username;
 	
 	/////////////////////////////////////NEEDS ENCRYPTION/////////////////////////
@@ -121,6 +121,10 @@ public class User{
 
 	public Role getRole() {
 		return role;
+	}
+	
+	public void setRole(Role role) {
+		this.role = role;
 	}
 	
 	//ToSTRING//
